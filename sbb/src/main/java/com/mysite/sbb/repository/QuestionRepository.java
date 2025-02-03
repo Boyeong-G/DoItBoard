@@ -1,6 +1,8 @@
 package com.mysite.sbb.repository;
 
 import com.mysite.sbb.entity.QuestionEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -9,4 +11,5 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Intege
     QuestionEntity findBySubject(String subject);
     QuestionEntity findBySubjectAndContent(String subject, String content);
     List<QuestionEntity> findBySubjectLike(String subject); // 특정 문자열과 일치
+    Page<QuestionEntity> findAll(Pageable pageable);
 }
