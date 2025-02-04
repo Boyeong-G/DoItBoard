@@ -1,14 +1,12 @@
 package com.mysite.sbb.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,4 +26,12 @@ public class QuestionEntity {
 
     @OneToMany(mappedBy = "questionEntity", cascade = CascadeType.REMOVE)
     private List<AnswerEntity> answerEntityList;
+
+    @ManyToOne
+    private SiteUserEntity author;
+
+    private LocalDateTime modifyDate;
+
+    @ManyToMany
+    Set<SiteUserEntity> voter;
 }
