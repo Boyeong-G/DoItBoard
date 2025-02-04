@@ -2,6 +2,7 @@ package com.mysite.sbb.service;
 
 import com.mysite.sbb.DataNotFoundException;
 import com.mysite.sbb.entity.QuestionEntity;
+import com.mysite.sbb.entity.SiteUserEntity;
 import com.mysite.sbb.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -40,11 +41,28 @@ public class QuestionService {
         }
     }
 
-    public void create(String subject, String content) {
-        QuestionEntity q = new QuestionEntity();
-        q.setSubject(subject);
-        q.setContent(content);
-        q.setCreateDate(LocalDateTime.now());
-        this.questionRepository.save(q);
+    public void create(String subject, String content, SiteUserEntity user) {
+        QuestionEntity question = new QuestionEntity();
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setCreateDate(LocalDateTime.now());
+        question.setAuthor(user);
+        this.questionRepository.save(question);
+    }
+
+    public void modify(QuestionEntity question, String subject, String content) {
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setModifyDate(LocalDateTime.now());
+        this.questionRepository.save(question);
+    }
+
+    public void delete(QuestionEntity question) {
+        this.questionRepository.delete(question);
+    }
+
+    public void vote(QuestionEntity question, SiteUserEntity siteUser) {
+        question.getVoter().add(siteUser);
+        this.questionRepository.save(question);
     }
 }

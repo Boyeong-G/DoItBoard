@@ -1,16 +1,16 @@
 package com.mysite.sbb.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
-@Builder
+
 @Getter
+@Setter
 @Entity
-@NoArgsConstructor
 public class AnswerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,10 +24,11 @@ public class AnswerEntity {
     @ManyToOne
     private QuestionEntity questionEntity;
 
-    public AnswerEntity(Integer id, String content, LocalDateTime createDate, QuestionEntity questionEntity) {
-        this.id = id;
-        this.content = content;
-        this.createDate = createDate;
-        this.questionEntity = questionEntity;
-    }
+    @ManyToOne
+    private SiteUserEntity author;
+
+    private LocalDateTime modifyDate;
+
+    @ManyToMany
+    Set<SiteUserEntity> voter;
 }
