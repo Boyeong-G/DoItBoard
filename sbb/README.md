@@ -17,4 +17,5 @@
    참고 사이트: https://velog.io/@haron/Spring-Data-JPA%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-interface%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EB%8F%99%EC%9E%91%ED%95%A0%EA%B9%8C <br><br>
 7. 빈(bean)에 대해 <br>
    참고 사이트: https://velog.io/@falling_star3/Spring-Boot-%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B9%88bean%EA%B3%BC-%EC%9D%98%EC%A1%B4%EA%B4%80%EA%B3%84 <br><br>
-8. 
+8. 쿼리 어노테이션(@Query)에서 오류 해결 <br>
+   참고 사이트: https://sg-moomin.tistory.com/entry/Validation-failed-for-query-for-method-public-abstract-%EC%98%A4%EB%A5%98-%ED%95%B4%EA%B2%B0 <br><br>
