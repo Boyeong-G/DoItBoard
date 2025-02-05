@@ -16,13 +16,14 @@ import java.util.Optional;
 public class AnswerService {
     private final AnswerRepository answerRepository;
 
-    public void create(QuestionEntity question, String content, SiteUserEntity author) {
+    public AnswerEntity create(QuestionEntity question, String content, SiteUserEntity author) {
         AnswerEntity answer = new AnswerEntity();
         answer.setContent(content);
         answer.setCreateDate(LocalDateTime.now());
         answer.setQuestionEntity(question);
         answer.setAuthor(author);
         this.answerRepository.save(answer);
+        return answer;
     }
 
     public AnswerEntity getAnswer(Integer id) {
