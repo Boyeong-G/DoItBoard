@@ -43,11 +43,12 @@ public class QuestionService {
 
     public Page<QuestionEntity> getList(int page, String kw) {
         List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createDate"));
+//        sorts.add(Sort.Order.desc("createDate"));
+        sorts.add(Sort.Order.desc("create_date"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        Specification<QuestionEntity> spec = search(kw);
-        return this.questionRepository.findAll(spec, pageable); // Specification 인터페이스를 사용해서 검색
-//        return this.questionRepository.findAllByKeyword(kw, pageable); // Query를 사용해서 검색
+//        Specification<QuestionEntity> spec = search(kw);
+//        return this.questionRepository.findAll(spec, pageable); // Specification 인터페이스를 사용해서 검색
+        return this.questionRepository.findAllByKeyword(kw, pageable); // Query를 사용해서 검색
     }
 
     public List<QuestionEntity> getList() {

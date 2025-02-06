@@ -18,15 +18,15 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Intege
     Page<QuestionEntity> findAll(Specification<QuestionEntity> spec, Pageable pageable);
 
     // 검색 기능 추가 구현 (Query를 사용)
-//    @Query(value = "SELECT DISTINCT q "
-//                 + "FROM question_entity q "
-//                 + "LEFT OUTER JOIN site_user_entity u1 ON q.author=u1 "
-//                 + "LEFT OUTER JOIN answer_entity a ON a.question=q "
-//                 + "LEFT OUTER JOIN site_user_entity u2 ON a.author=u2 "
-//                 + "WHERE q.subject Like %:kw% "
-//                 + "OR q.content Like %:kw% "
-//                 + "OR u1.username Like %:kw% "
-//                 + "OR a.content Like %:kw% "
-//                 + "OR u2.username Like %:kw% ", nativeQuery = true)
-//    Page<QuestionEntity> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
+    @Query(value = "SELECT DISTINCT q.id, q.content, q.create_date, q.subject, q.author_id, q.modify_date, q.createdate "
+                 + "FROM question_entity q "
+                 + "LEFT OUTER JOIN site_user_entity u1 ON q.author_id=u1.id "
+                 + "LEFT OUTER JOIN answer_entity a ON a.question_entity_id=q.id "
+                 + "LEFT OUTER JOIN site_user_entity u2 ON a.author_id=u2.id "
+                 + "WHERE q.subject Like %:kw% "
+                 + "OR q.content Like %:kw% "
+                 + "OR u1.username Like %:kw% "
+                 + "OR a.content Like %:kw% "
+                 + "OR u2.username Like %:kw% ", nativeQuery = true)
+    Page<QuestionEntity> findAllByKeyword(@Param("kw") String kw, Pageable pageable);
 }
