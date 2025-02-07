@@ -1,9 +1,11 @@
 package com.mysite.sbb.controller;
 
+import com.mysite.sbb.entity.AnswerEntity;
 import com.mysite.sbb.entity.QuestionEntity;
 import com.mysite.sbb.entity.SiteUserEntity;
 import com.mysite.sbb.form.AnswerForm;
 import com.mysite.sbb.form.QuestionForm;
+import com.mysite.sbb.service.AnswerService;
 import com.mysite.sbb.service.QuestionService;
 import com.mysite.sbb.service.UserService;
 import jakarta.validation.Valid;
@@ -25,6 +27,7 @@ import java.security.Principal;
 @Controller
 public class QuestionController {
     private final QuestionService questionService;
+    private final AnswerService answerService;
     private final UserService userService;
 
     @GetMapping("/list")
@@ -37,9 +40,14 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm,
+                         @RequestParam(value = "page", defaultValue = "0") int page,
+                         @RequestParam(value = "clickOnPage", defaultValue = "false") boolean clickOnPage) {
         QuestionEntity question = this.questionService.getQuestion(id);
+        Page<AnswerEntity> paging = this.answerService.getList(page, question);
         model.addAttribute("question", question);
+        model.addAttribute("paging", paging);
+
         return "question_detail";
     }
 
